@@ -11,6 +11,7 @@ const Cesar = () => {
 
   const isRealWord = async (word) => {
     const apiKey = "94c347f8-19fe-4818-a189-8cfb2c6b348d";
+
     const response = await axios.get(
       `https://www.dictionaryapi.com/api/v3/references/spanish/json/${word}?key=${apiKey}`
     );
@@ -27,6 +28,10 @@ const Cesar = () => {
     }
   };
 
+  function containsWhitespace(str) {
+    return /\s/.test(str);
+  }
+
   const handleSubmit = async (event) => {
     setSubmitting(true);
     event.preventDefault();
@@ -34,14 +39,20 @@ const Cesar = () => {
       let results = await decodeCaesarCipher(ciphertext, 0, true);
       const sortResults = [];
       for (let i = 0; i < results.length; i++) {
-        if (await isRealWord(results[i])) {
+        if (containsWhitespace(results[i])) {
+          let words = results[i].split(" ");
+          if (await isRealWord(words[0])) {
+            sortResults.unshift(results[i]);
+          } else {
+          sortResults.push(results[i]);
+          }
+        } else if (await isRealWord(results[i])) {
           sortResults.unshift(results[i]);
-          break;
         } else {
           sortResults.push(results[i]);
         }
       }
-      sortResults.splice(1, sortResults.length - 1);
+      sortResults.splice(4, sortResults.length - 1);
       setSubmitting(false);
       setPlaintext(
         sortResults.map((result) => (
@@ -87,7 +98,6 @@ const Cesar = () => {
             />
             <span class="checkbox-label">Forzar resultado</span>
           </label>
-          
         </div>
         <button class="submit-button" type="submit">
           Decifrar
