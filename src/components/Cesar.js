@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { decodeCaesarCipher } from "./../Scripts/CesarTool";
+import { decodeCaesarCipher, caesarEncode } from "./../Scripts/CesarTool";
 import axios from "axios";
 
 const Cesar = () => {
-  const [ciphertext, setCiphertext] = useState("");
   const [shift, setShift] = useState(0);
   const [bruteForce, setBruteForce] = useState(false);
   const [plaintext, setPlaintext] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [input, setInput] = useState("");
+  const [output, setOutput] = useState("");
+  const [isEncoding, setIsEncoding] = useState(true);
+
+  const handleInputChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const handleOptionChange = (event) => {
+    setIsEncoding(event.target.value === "encode");
+  };
 
   const isRealWord = async (word) => {
     const apiKey = "94c347f8-19fe-4818-a189-8cfb2c6b348d";
@@ -35,93 +45,116 @@ const Cesar = () => {
   const handleSubmit = async (event) => {
     setSubmitting(true);
     event.preventDefault();
-    if (bruteForce) {
-      let results = await decodeCaesarCipher(ciphertext, 0, true);
-      const sortResults = [];
-      for (let i = 0; i < results.length; i++) {
-        if (containsWhitespace(results[i])) {
-          let words = results[i].split(" ");
-          if (await isRealWord(words[0])) {
+    if (isEncoding) {
+      setSubmitting(false);
+      setOutput(caesarEncode(input, shift));
+    } else {
+      if (bruteForce) {
+        let results = await decodeCaesarCipher(input, 0, true);
+        const sortResults = [];
+        for (let i = 0; i < results.length; i++) {
+          if (containsWhitespace(results[i])) {
+            let words = results[i].split(" ");
+            if (await isRealWord(words[0])) {
+              sortResults.unshift(results[i]);
+            } else {
+              sortResults.push(results[i]);
+            }
+          } else if (await isRealWord(results[i])) {
             sortResults.unshift(results[i]);
           } else {
-          sortResults.push(results[i]);
+            sortResults.push(results[i]);
           }
-        } else if (await isRealWord(results[i])) {
-          sortResults.unshift(results[i]);
-        } else {
-          sortResults.push(results[i]);
         }
+        sortResults.splice(4, sortResults.length - 1);
+        setSubmitting(false);
+        setOutput(
+          sortResults.map((result) => (
+            <li key={result} style={{ listStyle: "none" }}>
+              {result}
+            </li>
+          ))
+        );
+      } else {
+        const decodedText = decodeCaesarCipher(input, shift);
+        setSubmitting(false);
+        setOutput(decodedText);
       }
-      sortResults.splice(4, sortResults.length - 1);
-      setSubmitting(false);
-      setPlaintext(
-        sortResults.map((result) => (
-          <li key={result} style={{ listStyle: "none" }}>
-            {result}
-          </li>
-        ))
-      );
-    } else {
-      const decodedText = decodeCaesarCipher(ciphertext, shift);
-      setSubmitting(false);
-      setPlaintext(decodedText);
     }
   };
 
   return (
-    <div class="form-container">
+    <div className="container">
+      <h1>Codificador/decodificador Cesar</h1>
       <form onSubmit={handleSubmit}>
-        <div class="form-group">
-          <label for="ciphertext">Código cifrado:</label>
-          <input
-            id="ciphertext"
-            type="text"
-            value={ciphertext}
-            onChange={(e) => setCiphertext(e.target.value)}
-          />
-        </div>
-        <div class="form-group">
-          <label for="shift">Rotación:</label>
-          <input
-            id="shift"
-            type="number"
-            value={shift}
-            onChange={(e) => setShift(parseInt(e.target.value))}
-          />
-        </div>
-        <div class="form-group">
-          <label class="checkbox">
+        <div className="encode-decode">
+          <div>
             <input
-              type="checkbox"
-              class="checkbox-input"
-              checked={bruteForce}
-              onChange={(e) => setBruteForce(e.target.checked)}
+              type="radio"
+              id="encode"
+              name="option"
+              value="encode"
+              checked={isEncoding}
+              onChange={handleOptionChange}
             />
-            <span class="checkbox-label">Forzar resultado</span>
-          </label>
-        </div>
-        <button class="submit-button" type="submit">
-          Decifrar
-        </button>
-      </form>
-      <div class="results-container">
-        {submitting ? (
-          <div class="loading">
-            <img
-              id="loading-image"
-              src="https://i.imgur.com/L28drxo.gif"
-              alt="Loading animation"
-            />
-            <p>Decifrando...</p>
+            <label htmlFor="encode">Codificar</label>
           </div>
-        ) : (
-          <>
-            <p class="result-label">Resultado:</p>
-            <ol class="result-list">
-              <li class="result-item">{plaintext}</li>
-            </ol>
-          </>
+          <div>
+            <input
+              type="radio"
+              id="decode"
+              name="option"
+              value="decode"
+              checked={!isEncoding}
+              onChange={handleOptionChange}
+            />
+            <label htmlFor="decode">Decodificar</label>
+          </div>
+        </div>
+
+        <div>
+          <textarea
+            value={input}
+            onChange={handleInputChange}
+            placeholder={
+              isEncoding
+                ? "Ingrese el código para codificar"
+                : "Ingrese el texto codificado en cesar para decodificar"
+            }
+          />
+        </div>
+        <div id="rotacion">
+          <div class="form-group">
+            <label for="shift">Rotación:</label>
+            <input
+              id="shift"
+              type="number"
+              value={shift}
+              onChange={(e) => setShift(parseInt(e.target.value))}
+            />
+          </div>
+        </div>
+        {!isEncoding && (
+          <div class="form-group">
+            <label class="checkbox">
+              <input
+                type="checkbox"
+                class="checkbox-input"
+                checked={bruteForce}
+                onChange={(e) => setBruteForce(e.target.checked)}
+              />
+              <span class="checkbox-label">Forzar resultado</span>
+            </label>
+          </div>
         )}
+        <div>
+          <button type="submit">
+            {isEncoding ? "Codificar" : "Decodificar"}
+          </button>
+        </div>
+      </form>
+      <div>
+        <textarea readOnly value={output} />
       </div>
     </div>
   );

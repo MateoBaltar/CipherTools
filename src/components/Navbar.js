@@ -45,7 +45,7 @@ const Navbar = () => {
               <a className="dropdown-item" href="/Base64">
                 Base64
               </a>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href="/Hexadecimal">
                 Hexadecimal
               </a>
             </div>
