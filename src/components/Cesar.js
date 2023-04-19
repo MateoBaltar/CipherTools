@@ -5,8 +5,6 @@ import axios from "axios";
 const Cesar = () => {
   const [shift, setShift] = useState(0);
   const [bruteForce, setBruteForce] = useState(false);
-  const [plaintext, setPlaintext] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isEncoding, setIsEncoding] = useState(true);
@@ -43,10 +41,8 @@ const Cesar = () => {
   }
 
   const handleSubmit = async (event) => {
-    setSubmitting(true);
     event.preventDefault();
     if (isEncoding) {
-      setSubmitting(false);
       setOutput(caesarEncode(input, shift));
     } else {
       if (bruteForce) {
@@ -54,6 +50,8 @@ const Cesar = () => {
         const sortResults = [];
         for (let i = 0; i < results.length; i++) {
           if (containsWhitespace(results[i])) {
+            console.log("contains white space")
+            console.log(results)
             let words = results[i].split(" ");
             if (await isRealWord(words[0])) {
               sortResults.unshift(results[i]);
@@ -66,18 +64,9 @@ const Cesar = () => {
             sortResults.push(results[i]);
           }
         }
-        sortResults.splice(4, sortResults.length - 1);
-        setSubmitting(false);
-        setOutput(
-          sortResults.map((result) => (
-            <li key={result} style={{ listStyle: "none" }}>
-              {result}
-            </li>
-          ))
-        );
+        setOutput(sortResults[0])
       } else {
         const decodedText = decodeCaesarCipher(input, shift);
-        setSubmitting(false);
         setOutput(decodedText);
       }
     }
