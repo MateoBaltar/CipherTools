@@ -73,7 +73,8 @@ const Cesar = () => {
   };
 
   return (
-    <div className="container">
+    <div>
+      <div className="container">
       <h1>Codificador/decodificador Cesar</h1>
       <form onSubmit={handleSubmit}>
         <div className="encode-decode">
@@ -140,7 +141,21 @@ const Cesar = () => {
         </div>
       </form>
       <textarea readOnly value={output} />
+      <br/>
+      <p>
+        En criptografía, el cifrado César, también conocido como cifrado por
+        desplazamiento, código de César o desplazamiento de César, es una de las
+        técnicas de cifrado más simples y más usadas. Es un tipo de cifrado por
+        sustitución en el que una letra en el texto original es reemplazada por
+        otra letra que se encuentra un número fijo de posiciones más adelante en
+        el alfabeto. Por ejemplo, con un desplazamiento de 3, la A sería
+        sustituida por la D (situada 3 lugares a la derecha de la A), la B sería
+        reemplazada por la E, etc. Este método debe su nombre a Julio César, que
+        lo usaba para comunicarse con sus generales.
+      </p>
     </div>
+    </div>
+    
   );
 };
 export default Cesar;

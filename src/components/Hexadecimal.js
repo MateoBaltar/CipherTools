@@ -35,53 +35,62 @@ const Hexadecimal = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Codificador/decodificador Hexadecimal</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="encode-decode">
-          <div>
-            <input
-              type="radio"
-              id="encode"
-              name="option"
-              value="encode"
-              checked={isEncoding}
-              onChange={handleOptionChange}
-            />
-            <label htmlFor="encode">Codificar</label>
+    <div>
+      <div className="container">
+        <h1>Codificador/decodificador Hexadecimal</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="encode-decode">
+            <div>
+              <input
+                type="radio"
+                id="encode"
+                name="option"
+                value="encode"
+                checked={isEncoding}
+                onChange={handleOptionChange}
+              />
+              <label htmlFor="encode">Codificar</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="decode"
+                name="option"
+                value="decode"
+                checked={!isEncoding}
+                onChange={handleOptionChange}
+              />
+              <label htmlFor="decode">Decodificar</label>
+            </div>
           </div>
+
           <div>
-            <input
-              type="radio"
-              id="decode"
-              name="option"
-              value="decode"
-              checked={!isEncoding}
-              onChange={handleOptionChange}
+            <textarea
+              value={input}
+              onChange={handleInputChange}
+              placeholder={
+                isEncoding
+                  ? "Ingrese el código para codificar"
+                  : "Ingrese el texto codificado en base64 para decodificar"
+              }
             />
-            <label htmlFor="decode">Decodificar</label>
           </div>
-        </div>
+          <div id="submit">
+            <button type="submit">
+              {isEncoding ? "Codificar" : "Decodificar"}
+            </button>
+          </div>
+        </form>
+        <textarea readOnly value={output} />
 
-        <div>
-          <textarea
-            value={input}
-            onChange={handleInputChange}
-            placeholder={
-              isEncoding
-                ? "Ingrese el código para codificar"
-                : "Ingrese el texto codificado en base64 para decodificar"
-            }
-          />
-        </div>
-        <div id="submit">
-          <button type="submit">
-            {isEncoding ? "Codificar" : "Decodificar"}
-          </button>
-        </div>
-      </form>
-
-      <textarea readOnly value={output} />
+        <p>
+          El sistema hexadecimal (abreviado hex.) es el sistema de numeración
+          posicional que tiene como base el 16. Su uso actual está muy vinculado
+          a la informática y ciencias de la computación donde las operaciones de
+          la CPU suelen usar el byte u octeto como unidad básica de memoria,
+          debido a que un byte representa 2^8 valores posibles.
+        </p>
+      </div>
     </div>
   );
 };

@@ -48,6 +48,12 @@ const Navbar = () => {
               <a className="dropdown-item" href="/Hexadecimal">
                 Hexadecimal
               </a>
+              <a className="dropdown-item" href="/Vigenere">
+                Vigenère
+              </a>
+              <a className="dropdown-item" href="/Morse">
+                Morse
+              </a>
             </div>
           </li>
         </ul>

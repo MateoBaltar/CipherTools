@@ -43,109 +43,36 @@ export const Cards = () => {
                 />
               </Link>
               <div class="card-body">
-                <p class="card-text">
-                  Hexadecimal
-                </p>
+                <p class="card-text">Hexadecimal</p>
               </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="card mb-4 box-shadow">
-              <img
-                class="card-img-top"
-                data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                alt="Card image cap"
-              />
+              <Link to="/Vigenere">
+                <img
+                  class="card-img-top"
+                  src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Vigen%C3%A8re_square_shading.png"
+                  alt="Card image cap"
+                />
+              </Link>
               <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      Edit
-                    </button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
+                <p class="card-text">Vigenere</p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card mb-4 box-shadow">
-              <img
-                class="card-img-top"
-                data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                alt="Card image cap"
-              />
+              <Link to="/Morse">
+                <img
+                  class="card-img-top"
+                  src="https://www.etsit.upm.es/fileadmin/documentos/biblioteca/biblioteca/galerias_fotograficas/Exposicion_Museo/codigo-morse_2.jpg"
+                  alt="Card image cap"
+                />
+              </Link>
               <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      Edit
-                    </button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img
-                class="card-img-top"
-                data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      Edit
-                    </button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
+                <p class="card-text">Morse</p>
               </div>
             </div>
           </div>
