@@ -6,7 +6,6 @@ export function decodeCaesarCipher(ciphertext, shift, bruteForce = false) {
     }
     return results;
   }
-
   let plaintext = "";
   for (let i = 0; i < ciphertext.length; i++) {
     const charCode = ciphertext.charCodeAt(i);

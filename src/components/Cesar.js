@@ -63,6 +63,7 @@ const Cesar = () => {
       );
     } else {
       const decodedText = decodeCaesarCipher(ciphertext, shift);
+      setSubmitting(false);
       setPlaintext(decodedText);
     }
   };
