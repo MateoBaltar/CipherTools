@@ -1,4 +1,3 @@
-import "./App.css";
 import Navbar from "../src/components/Navbar";
 import Main from "./components/Main";
 import { Route, Routes } from "react-router-dom";
@@ -9,7 +8,10 @@ import Hexadecimal from "./components/Hexadecimal";
 function App() {
   return (
     <div className="App">
+    <header>
       <Navbar />
+    </header>
+      
 
       <Routes>
         <Route exact path={"/"} element={<Main />} />

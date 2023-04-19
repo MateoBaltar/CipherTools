@@ -74,15 +74,14 @@ const Hexadecimal = () => {
             }
           />
         </div>
-        <div>
+        <div id="submit">
           <button type="submit">
             {isEncoding ? "Codificar" : "Decodificar"}
           </button>
         </div>
       </form>
-      <div>
-        <textarea readOnly value={output} />
-      </div>
+
+      <textarea readOnly value={output} />
     </div>
   );
 };

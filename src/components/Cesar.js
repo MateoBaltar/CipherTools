@@ -50,8 +50,8 @@ const Cesar = () => {
         const sortResults = [];
         for (let i = 0; i < results.length; i++) {
           if (containsWhitespace(results[i])) {
-            console.log("contains white space")
-            console.log(results)
+            console.log("contains white space");
+            console.log(results);
             let words = results[i].split(" ");
             if (await isRealWord(words[0])) {
               sortResults.unshift(results[i]);
@@ -64,7 +64,7 @@ const Cesar = () => {
             sortResults.push(results[i]);
           }
         }
-        setOutput(sortResults[0])
+        setOutput(sortResults[0]);
       } else {
         const decodedText = decodeCaesarCipher(input, shift);
         setOutput(decodedText);
@@ -77,7 +77,7 @@ const Cesar = () => {
       <h1>Codificador/decodificador Cesar</h1>
       <form onSubmit={handleSubmit}>
         <div className="encode-decode">
-          <div>
+          <div id="Codificar">
             <input
               type="radio"
               id="encode"
@@ -88,7 +88,7 @@ const Cesar = () => {
             />
             <label htmlFor="encode">Codificar</label>
           </div>
-          <div>
+          <div id="Decodificar">
             <input
               type="radio"
               id="decode"
@@ -100,18 +100,15 @@ const Cesar = () => {
             <label htmlFor="decode">Decodificar</label>
           </div>
         </div>
-
-        <div>
-          <textarea
-            value={input}
-            onChange={handleInputChange}
-            placeholder={
-              isEncoding
-                ? "Ingrese el código para codificar"
-                : "Ingrese el texto codificado en cesar para decodificar"
-            }
-          />
-        </div>
+        <textarea
+          value={input}
+          onChange={handleInputChange}
+          placeholder={
+            isEncoding
+              ? "Ingrese el código para codificar"
+              : "Ingrese el texto codificado en cesar para decodificar"
+          }
+        />
         <div id="rotacion">
           <div class="form-group">
             <label for="shift">Rotación:</label>
@@ -136,15 +133,13 @@ const Cesar = () => {
             </label>
           </div>
         )}
-        <div>
+        <div id="submit">
           <button type="submit">
             {isEncoding ? "Codificar" : "Decodificar"}
           </button>
         </div>
       </form>
-      <div>
-        <textarea readOnly value={output} />
-      </div>
+      <textarea readOnly value={output} />
     </div>
   );
 };

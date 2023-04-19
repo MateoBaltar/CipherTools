@@ -62,13 +62,14 @@ const Base64 = () => {
             }
           />
         </div>
-        <div>
-          <button type="submit">{isEncoding ? "Codificar" : "Decodificar"}</button>
+        <div id="submit">
+          <button type="submit">
+            {isEncoding ? "Codificar" : "Decodificar"}
+          </button>
         </div>
       </form>
-      <div>
-        <textarea readOnly value={output} />
-      </div>
+
+      <textarea readOnly value={output} />
     </div>
   );
 };
