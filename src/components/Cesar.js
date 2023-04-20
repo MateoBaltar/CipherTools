@@ -18,8 +18,8 @@ const Cesar = () => {
   };
 
   const isRealWord = async (word) => {
-    const apiKey = "94c347f8-19fe-4818-a189-8cfb2c6b348d";
-
+    const apiKey = process.env.REACT_APP_API_KEY;
+    
     const response = await axios.get(
       `https://www.dictionaryapi.com/api/v3/references/spanish/json/${word}?key=${apiKey}`
     );
